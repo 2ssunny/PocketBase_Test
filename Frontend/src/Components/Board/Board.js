@@ -9,12 +9,8 @@ function App() {
           <span className="title-text2">Home</span>
         </Link>
         <br></br>
-        <Link to="Register" className="title-text">
-          <span className="title-text2">Register</span>
-        </Link>
-        <br></br>
-        <Link to="Board" className="title-text">
-          <span className="title-text2">Board</span>
+        <Link to="Upload" className="title-text">
+          <span className="title-text2">Upload</span>
         </Link>
       </header>
     </div>
