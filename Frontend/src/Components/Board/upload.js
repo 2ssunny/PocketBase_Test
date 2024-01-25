@@ -1,11 +1,14 @@
 import PocketBase from "pocketbase";
 import React, { useState } from "react";
+
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import "./upload.css";
 
 function App() {
   const pb = new PocketBase("http://127.0.0.1:8090");
+  const navigate = useNavigate(); // navigate 객체 생성
 
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
@@ -25,7 +28,8 @@ function App() {
       return;
     }
     const record = await pb.collection("posts").create(data);
-    <Link to="/Board" />;
+    alert("게시글이 등록되었습니다. 게시글 목록으로 돌아갑니다.");
+    navigate("/Board");
   };
 
   return (
