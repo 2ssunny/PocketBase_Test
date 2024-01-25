@@ -1,6 +1,1 @@
-Backend/pb_data/data.db
-Backend/pb_data/data.db-shm
-Backend/pb_data/data.db-wal
-Backend/pb_data/logs.db
-Backend/pb_data/logs.db-shm
-Backend/pb_data/logs.db-wal
+Backend
