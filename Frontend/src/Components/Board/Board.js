@@ -46,14 +46,10 @@ function App() {
       {posts.map((post, index) => {
         return (
           <div key={index} className="boardList">
-            <b className="text-muted">Title:</b>
-            <p>{post.Title}</p>
-            <b className="text-muted">Body:</b>
-            <p>{post.Body}</p>
-            <b className="text-muted">AttachedPhoto:</b>
-            <p>{post.Photo}</p>
-            <b className="text-muted">PostingDate:</b>
-            <p>{post.created}</p>
+            <p className="boardListTitle">{post.Title}</p>
+            <p className="boardListBody">{post.Body}</p>
+            <p className="boardListPhoto">{post.Photo}</p>
+            <p className="boardListCreated">{post.created.slice(0, 19)}</p>
           </div>
         );
       })}
