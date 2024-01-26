@@ -2,6 +2,7 @@ import Home from "./Components/home.js";
 import Register from "./Register/Register.js";
 import Board from "./Components/Board/Board.js";
 import Upload from "./Components/Board/upload.js";
+import Login from "./Components/Login/Login.js";
 
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route index element={<Home />} />
           <Route path="Register" element={<Register />} />
+          <Route path="Login" element={<Login />} />
           <Route path="Board">
             <Route path="" element={<Board />} />
             <Route path="Upload" element={<Upload />} />

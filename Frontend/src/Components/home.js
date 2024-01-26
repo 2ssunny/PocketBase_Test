@@ -9,6 +9,10 @@ function App() {
           <span className="title-text2">Home</span>
         </Link>
         <br></br>
+        <Link to="Login" className="title-text">
+          <span className="title-text2">Login</span>
+        </Link>
+        <br></br>
         <Link to="Register" className="title-text">
           <span className="title-text2">Register</span>
         </Link>
