@@ -9,8 +9,8 @@ function App() {
   const navigate = useNavigate(); // navigate 객체 생성
 
   const username = localStorage.getItem("username");
+  const verified = localStorage.getItem("verified");
 
-  const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
   const handlePostupload = async () => {
@@ -19,18 +19,19 @@ function App() {
       Title: username + "님의 게시글",
     };
 
-    if (body == "") {
-      alert("내용을 입력해주세요.");
-      return;
-    }
-    if (username == null) {
-      alert("로그인을 한 후 이용해주세요.");
-      return;
-    }
-    if (body !== "" && username !== null) {
+    if (body !== "" && username !== null && verified == "true") {
       const record = await pb.collection("posts").create(data);
       alert("게시글이 등록되었습니다. 게시글 목록으로 돌아갑니다.");
       navigate("/Board");
+    } else if (verified == "false") {
+      alert("게시글을 등록하기 위해서는 이메일 인증이 필요합니다.");
+      return;
+    } else if (body == "") {
+      alert("내용을 입력해주세요.");
+      return;
+    } else if (username == null) {
+      alert("로그인을 한 후 이용해주세요.");
+      return;
     }
   };
   const handleHome = async () => {
