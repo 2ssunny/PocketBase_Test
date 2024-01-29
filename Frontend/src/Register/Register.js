@@ -1,10 +1,13 @@
 import PocketBase from "pocketbase";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import "./register.css";
 
 function App() {
   const pb = new PocketBase("http://127.0.0.1:8090/");
+
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -23,47 +26,76 @@ function App() {
       alert("비밀번호가 일치하지 않습니다.");
       return;
     }
-    const record = await pb.collection("users").create(data);
+
+    const record = await pb
+      .collection("users")
+      .create(data)
+      .then(async (authData) => {
+        alert("회원가입이 완료되었습니다. 인증 메일을 확인해주세요.");
+        // 이메일 인증 요청
+        navigate("/");
+        await pb.collection("users").requestVerification(data.email);
+      })
+      .catch((error) => {
+        if (error.status === 400) {
+          // 로그인 실패, 오류 메시지 표시
+          alert(
+            "이메일이 유효하지 않거나, 이미 사용중, 또는 비밀번호의 길이가 8자 미만입니다."
+          );
+        } else {
+          console.error(error);
+        }
+      });
   };
 
   return (
-    <div>
-      <label>
-        Username:
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </label>
+    <div className="register">
+      <div className="registertitle">
+        <h2 className="registertitle_text">회원가입</h2>
+      </div>
+      <div className="register_input">
+        <label>
+          Username:
+          <br></br>
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </label>
+        <br />
+        <label>
+          E-mail:
+          <br></br>
+          <input
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </label>
+        <br />
+        <label>
+          Password:
+          <br></br>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </label>
+        <br />
+        <label>
+          PasswordConfirm:
+          <br></br>
+          <input
+            type="password"
+            value={passwordconfirm}
+            onChange={(e) => setPasswordconfirm(e.target.value)}
+          />
+        </label>
+      </div>
       <br />
-      <label>
-        E-mail:
-        <input
-          type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </label>
-      <br />
-      <label>
-        Password:
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </label>
-      <br />
-      <label>
-        PasswordConfirm:
-        <input
-          type="password"
-          value={passwordconfirm}
-          onChange={(e) => setPasswordconfirm(e.target.value)}
-        />
-      </label>
-      <br />
+      <p>중복테스트</p>
       <button onClick={handleLogin}>회원가입</button>
     </div>
   );
