@@ -2,6 +2,8 @@ import PocketBase from "pocketbase";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import "./verify.css";
+
 function App() {
   const pb = new PocketBase("http://127.0.0.1:8090/");
 
@@ -24,19 +26,35 @@ function App() {
     );
     navigate("/");
   };
+
+  const handleHome = async () => {
+    navigate("/");
+  };
+
   return (
-    <div>
-      <h1>Verify</h1>
-      <label>
-        E-mail:
-        <input
-          type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </label>
-      <p>Verify your email</p>
-      <button onClick={handleConfirmVerification}>인증이메일 받기</button>
+    <div className="verify">
+      <div className="verify_box">
+        <h1 className="verify_title">Verify</h1>
+
+        <div className="verify_email_input">
+          <label>
+            E-mail:
+            <br></br>
+            <input
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </label>
+        </div>
+        <span>회원가입시 사용한 이메일을 입력하여 이메일을 인증하세요.</span>
+        <button onClick={handleConfirmVerification} className="verify_button">
+          인증이메일 받기
+        </button>
+        <button onClick={handleHome} className="verify_button_home">
+          Home
+        </button>
+      </div>
     </div>
   );
 }

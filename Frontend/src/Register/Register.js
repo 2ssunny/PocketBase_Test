@@ -47,56 +47,66 @@ function App() {
         }
       });
   };
+  const handleHome = async () => {
+    navigate("/");
+  };
 
   return (
     <div className="register">
-      <div className="registertitle">
-        <h2 className="registertitle_text">회원가입</h2>
+      <div className="register_box">
+        <div className="registertitle">
+          <h2>회원가입</h2>
+        </div>
+        <div className="register_input">
+          <label>
+            Username:
+            <br></br>
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </label>
+          <p className="space"></p>
+          <label>
+            E-mail:
+            <br></br>
+            <input
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </label>
+          <p className="space"></p>
+          <label>
+            Password:
+            <br></br>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </label>
+          <p className="space"></p>
+          <label>
+            PasswordConfirm:
+            <br></br>
+            <input
+              type="password"
+              value={passwordconfirm}
+              onChange={(e) => setPasswordconfirm(e.target.value)}
+            />
+          </label>
+          <p className="space"></p>
+        </div>
+        <p className="space"></p>
+        <button onClick={handleLogin} className="register_button">
+          회원가입
+        </button>
+        <button onClick={handleHome} className="register_button_home">
+          Home
+        </button>
       </div>
-      <div className="register_input">
-        <label>
-          Username:
-          <br></br>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-          E-mail:
-          <br></br>
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-          Password:
-          <br></br>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-          PasswordConfirm:
-          <br></br>
-          <input
-            type="password"
-            value={passwordconfirm}
-            onChange={(e) => setPasswordconfirm(e.target.value)}
-          />
-        </label>
-      </div>
-      <br />
-      <p>중복테스트</p>
-      <button onClick={handleLogin}>회원가입</button>
     </div>
   );
 }
