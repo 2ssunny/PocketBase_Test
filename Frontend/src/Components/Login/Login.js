@@ -24,6 +24,8 @@ function App() {
         if (authData.record) {
           // 로그인 성공, 사용자 이름 저장
           localStorage.setItem("username", authData.record.username);
+          localStorage.setItem("verified", authData.record.verified);
+
           navigate("/");
         }
       })
@@ -40,7 +42,7 @@ function App() {
   return (
     <div>
       <label>
-        E-mail:
+        E-mail or Username:
         <input
           type="text"
           value={email}
