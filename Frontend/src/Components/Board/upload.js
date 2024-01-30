@@ -37,21 +37,34 @@ function App() {
   const handleHome = async () => {
     navigate("/");
   };
+  const handleBoard = async () => {
+    navigate("/Board");
+  };
 
   return (
-    <div className="board">
-      <button onClick={handleHome}>Home</button>
+    <div className="Upload">
       <h2>Username: {username}</h2>
-      <label>
-        Body:
-        <input
-          type="text"
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
-        />
-      </label>
+      <div className="Upload_body_input">
+        <label>
+          Body:
+          <br></br>
+          <input
+            type="text"
+            value={body}
+            onChange={(e) => setBody(e.target.value)}
+          />
+        </label>
+      </div>
       <br />
-      <button onClick={handlePostupload}>Post</button>
+      <button onClick={handlePostupload} className="Upload_button_upload">
+        Post
+      </button>
+      <button onClick={handleBoard} className="Upload_button_board">
+        Board
+      </button>
+      <button onClick={handleHome} className="Upload_button_home">
+        Home
+      </button>
     </div>
   );
 }

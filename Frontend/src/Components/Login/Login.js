@@ -39,28 +39,47 @@ function App() {
       });
   };
 
-  return (
-    <div>
-      <label>
-        E-mail or Username:
-        <input
-          type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </label>
-      <br />
-      <label>
-        Password:
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </label>
+  const handleHome = async () => {
+    navigate("/");
+  };
 
-      <br />
-      <button onClick={handleLogin}>로그인</button>
+  return (
+    <div className="Login">
+      <div className="Login_box">
+        <div className="Login_title">
+          <h2>로그인</h2>
+        </div>
+        <div className="Login_input">
+          <label>
+            E-mail or Username:
+            <br></br>
+            <input
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </label>
+
+          <p className="space"></p>
+          <label>
+            Password:
+            <br></br>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </label>
+        </div>
+        <p className="space"></p>
+        <br />
+        <button onClick={handleLogin} className="Login_button">
+          로그인
+        </button>
+        <button onClick={handleHome} className="login_button_home">
+          Home
+        </button>
+      </div>
     </div>
   );
 }
