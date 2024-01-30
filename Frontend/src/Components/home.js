@@ -29,7 +29,7 @@ function App() {
             {username ? (
               <>
                 <p>{username}님 환영합니다</p>
-                {verified == "true" ? (
+                {verified === "true" ? (
                   <p className="home_title_verified">
                     이메일 인증이 완료된 계정입니다.
                   </p>

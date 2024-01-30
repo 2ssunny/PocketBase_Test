@@ -48,7 +48,18 @@ function App() {
           <div key={index} className="boardList">
             <p className="boardListTitle">{post.Title}</p>
             <p className="boardListBody">{post.Body}</p>
-            <p className="boardListPhoto">{post.Photo}</p>
+            {post.File &&
+              post.File.map((filename, fileIndex) => {
+                const fileUrl = `http://127.0.0.1:8090/api/files/${post.collectionName}/${post.id}/${filename}`;
+                return (
+                  <button
+                    key={fileIndex}
+                    onClick={() => window.open(fileUrl, "_blank")}
+                  >
+                    파일 {fileIndex + 1} 보기
+                  </button>
+                );
+              })}
             <p className="boardListCreated">{post.created.slice(0, 19)}</p>
           </div>
         );
