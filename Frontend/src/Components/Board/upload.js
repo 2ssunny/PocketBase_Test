@@ -1,49 +1,39 @@
 import PocketBase from "pocketbase";
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "./upload.css";
 
 function App() {
   const pb = new PocketBase("http://127.0.0.1:8090");
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // navigate 객체 생성
 
   const username = localStorage.getItem("username");
   const verified = localStorage.getItem("verified");
 
   const [body, setBody] = useState("");
-  const fileInput = useRef(null); // 파일 업로드를 위한 참조
 
   const handlePostupload = async () => {
-    if (body !== "" && username !== null && verified === "true") {
-      if (fileInput.current.files.length === 0) {
-        alert("업로드할 파일을 선택해주세요.");
-        return;
-      }
+    const data = {
+      Body: body,
+      Title: username + "님의 게시글",
+    };
 
-      const formData = new FormData();
-      for (let file of fileInput.current.files) {
-        formData.append("documents", file, file.name);
-      }
-
-      formData.append("Body", body);
-      formData.append("Title", username + "님의 게시글");
-
-      await pb.collection("Posts").create(formData);
+    if (body !== "" && username !== null && verified == "true") {
+      const record = await pb.collection("posts").create(data);
       alert("게시글이 등록되었습니다. 게시글 목록으로 돌아갑니다.");
       navigate("/Board");
-    } else if (verified === "false") {
+    } else if (verified == "false") {
       alert("게시글을 등록하기 위해서는 이메일 인증이 필요합니다.");
       return;
-    } else if (body === "") {
+    } else if (body == "") {
       alert("내용을 입력해주세요.");
       return;
-    } else if (username === null) {
+    } else if (username == null) {
       alert("로그인을 한 후 이용해주세요.");
       return;
     }
   };
-
   const handleHome = async () => {
     navigate("/");
   };
@@ -61,7 +51,6 @@ function App() {
         />
       </label>
       <br />
-      <input type="file" ref={fileInput} multiple id="fileInput" />
       <button onClick={handlePostupload}>Post</button>
     </div>
   );
